@@ -1,0 +1,29 @@
+<?xml version='1.0'?>
+<ns2:test-suite xmlns:ns2='urn:model.allure.qatools.yandex.ru' start='1578101148695' stop='1578101157786'>
+    <name>navigating to contact-us page</name>
+    <title>navigating to contact-us page</title>
+    <test-cases>
+        <test-case start='1578101148710' status='failed' stop='1578101157781'>
+            <name>should allow user to navigating contact-us page </name>
+            <title>should allow user to navigating contact-us page </title>
+            <labels>
+                <label name='language' value='javascript'/>
+                <label name='framework' value='wdio'/>
+                <label name='thread' value='0-0'/>
+            </labels>
+            <parameters>
+                <parameter kind='argument' name='browser' value='chrome-79.0.3945.88'/>
+            </parameters>
+            <steps/>
+            <attachments>
+                <attachment title='Screenshot' source='8bd18779-1567-4821-834a-83cc2e42d4b3-attachment.png' type='image/png' size='172776'/>
+            </attachments>
+            <failure>
+                <message>Error: element ("//div/h3[contains(., "Contact Us")]") still not displayed after 3000ms</message>
+                <stack-trace>Error: element ("//div/h3[contains(., "Contact Us")]") still not displayed after 3000ms
+                    at ContactUS.waitForContactPageToLoad (/Users/Nick/Desktop/WDIO_Quora/webdriverIO-with-jasmineBDD/test/pageobjects/ta-contactus.page.js:21:28)
+                    at UserContext.&lt;anonymous> (/Users/Nick/Desktop/WDIO_Quora/webdriverIO-with-jasmineBDD/test/specs/ta-contact-us.spec.js:11:15)</stack-trace>
+            </failure>
+        </test-case>
+    </test-cases>
+</ns2:test-suite>

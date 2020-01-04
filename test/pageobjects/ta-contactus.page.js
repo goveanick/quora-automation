@@ -12,8 +12,8 @@ class ContactUS extends Page {
      * define or overwrite page methods
      */
     open () {
-        super.open('contact-us')       //this will append `contact-us` to the baseUrl to form complete URL
-        browser.pause(2000);
+        super.open('partners');       //this will append `contact-us` to the baseUrl to form complete URL
+        browser.pause(5000);
     }
 
     waitForContactPageToLoad () {
