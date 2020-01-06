@@ -13,7 +13,7 @@ class ContactUS extends Page {
      */
     open () {
         super.open('partners');       //this will append `contact-us` to the baseUrl to form complete URL
-        browser.pause(5000);
+        browser.pause(2000);
     }
 
     waitForContactPageToLoad () {
