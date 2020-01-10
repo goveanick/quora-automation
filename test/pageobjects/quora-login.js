@@ -6,6 +6,8 @@ class QuoraLogin {
     get viewAllSuggestions()          { return $$('div[class*="button_area u-text-align--center u-absolute"]'); }
     get allRequestButtons()           { return $$('div[class*="A2APromptBundle"] div[class*="item_action"]'); }
     get popUpCloseButton()            { return $('g[id="small_close"]'); }
+    get allAnswerButtons()            { return $$('div[class="WantedAnswerSuggestions"] div[id*="request_button"]'); }
+    get refreshButton()               { return $('div[class*="A2APromptBundle"] div[class*="RefreshA2AQuestionListActionItem"] span[id*="label"]'); }
 
 
     setEmailField(email) {
@@ -23,20 +25,58 @@ class QuoraLogin {
     }
 
     clickOnFirstViewAllSuggestionsLink() {
-        // this.viewAllSuggestions[0].scrollIntoView();
+        browser.waitUntil(() => {
+            return (this.viewAllSuggestions[0].isDisplayed());
+        }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
         this.viewAllSuggestions[0].click();
     }
 
     clickRequestButtons() {
         console.log(this.allRequestButtons.length);
-        for(const button in this.allRequestButtons) {
-
-            this.allRequestButtons[button].click();
-            browser.pause(3000);
-            console.log('This is the number Im on: ' + button);
+        for(const requestButton of this.allRequestButtons) {
+            browser.waitUntil(() => {
+                return (this.allRequestButtons[0].isDisplayed());
+            }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+            requestButton.click();
+            browser.waitUntil(() => {
+                return (this.allAnswerButtons[0].isDisplayed());
+            }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+            console.log('This is the number Im on: ' + requestButton);
+            console.log(this.allAnswerButtons.length);
+            let i = 0;
+            while(i < 25){
+                browser.waitUntil(() => {
+                    return (this.allAnswerButtons[i].isDisplayed());
+                }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+                this.allAnswerButtons[i].click();
+                i++;
+            }
+            browser.waitUntil(() => {
+                return (this.popUpCloseButton.isDisplayed());
+            }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
             this.popUpCloseButton.click()
         }
 
+    }
+
+    clickRequestAnswerButtons() {
+        console.log(this.allAnswerButtons.length);
+        // for(const answerButton of this.allRequestButtons) {
+        //     answerButton.click();
+        //     browser.pause(1000);
+        // }
+        // for(let i = this.allRequestButtons.length - 5; i > 0; i--) {
+        //     this.allRequestButtons[i].click();
+        //     browser.pause(1000);
+        // }
+
+    }
+
+    clickRefreshButton() {
+        browser.waitUntil(() => {
+            return (this.refreshButton.isDisplayed());
+        }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+        this.refreshButton.click();
     }
 }
 

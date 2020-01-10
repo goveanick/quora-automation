@@ -40,7 +40,8 @@
     "lodash": "^4.17.4",
     "node-excel-to-json": "0.0.3",
     "underscore": "^1.8.3",
-    "webdriverio": "^5.3.5"
+    "webdriverio": "^5.3.5",
+    "yargs": "^15.1.0"
   },
   "devDependencies": {
     "@wdio/cli": "^5.3.5",
