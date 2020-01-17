@@ -38,7 +38,7 @@ class QuoraLogin {
         browser.waitUntil(() => {
             return (this.boxWith3QuestionsNeedingAnswers.isDisplayed());
         }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
-        console.log(this.allRequestButtons.length);
+        console.log(this.allRequestButtons.length + 'This is where I think it Jenkins is at' );
         for(const requestButton of this.allRequestButtons) {
             requestButton.click();
             browser.waitUntil(() => {
