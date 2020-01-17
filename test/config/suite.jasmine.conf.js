@@ -61,7 +61,7 @@ exports.config = {
         'goog:chromeOptions': {
           // to run chrome headless the following flags are required
           // (see https://developers.google.com/web/updates/2017/04/headless-chrome)
-          // args: ['--headless', '--disable-gpu'],
+          args: ['--headless', '--disable-gpu'],
         }
       },
 
@@ -149,7 +149,7 @@ exports.config = {
     // Options to be passed to Jasmine.
     jasmineNodeOpts: {
         // Jasmine default timeout
-        defaultTimeoutInterval: 60000,
+        defaultTimeoutInterval: 600000000,
         //
         // The Jasmine framework allows interception of each assertion in order to log the state of the application
         // or website depending on the result. For example, it is pretty handy to take a screenshot every time

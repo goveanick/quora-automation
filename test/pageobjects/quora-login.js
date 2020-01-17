@@ -5,9 +5,11 @@ class QuoraLogin {
     get submitButton()                { return $('div[class="form_inputs"] input[id*=submit_button]'); }
     get viewAllSuggestions()          { return $$('div[class*="button_area u-text-align--center u-absolute"]'); }
     get allRequestButtons()           { return $$('div[class*="A2APromptBundle"] div[class*="item_action"]'); }
+    get boxWith3QuestionsNeedingAnswers()           { return $('div[class*="A2APromptBundle"]'); }
     get popUpCloseButton()            { return $('g[id="small_close"]'); }
     get allAnswerButtons()            { return $$('div[class="WantedAnswerSuggestions"] div[id*="request_button"]'); }
     get refreshButton()               { return $('div[class*="A2APromptBundle"] div[class*="RefreshA2AQuestionListActionItem"] span[id*="label"]'); }
+    get requestAnswerBoxOnPartnerPage() { return $('div[class*="PartnerPromptsQuestionCarouselItem"]'); }
 
 
     setEmailField(email) {
@@ -26,17 +28,18 @@ class QuoraLogin {
 
     clickOnFirstViewAllSuggestionsLink() {
         browser.waitUntil(() => {
-            return (this.viewAllSuggestions[0].isDisplayed());
-        }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+            return (this.requestAnswerBoxOnPartnerPage.isDisplayed());
+        }, 30000, 'The box on the Partner\'s page that leads to the questions ' +
+            'that needs more answers was not displayed' + browser.getUrl());
         this.viewAllSuggestions[0].click();
     }
 
     clickRequestButtons() {
+        browser.waitUntil(() => {
+            return (this.boxWith3QuestionsNeedingAnswers.isDisplayed());
+        }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
         console.log(this.allRequestButtons.length);
         for(const requestButton of this.allRequestButtons) {
-            browser.waitUntil(() => {
-                return (this.allRequestButtons[0].isDisplayed());
-            }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
             requestButton.click();
             browser.waitUntil(() => {
                 return (this.allAnswerButtons[0].isDisplayed());
@@ -44,7 +47,11 @@ class QuoraLogin {
             console.log('This is the number Im on: ' + requestButton);
             console.log(this.allAnswerButtons.length);
             let i = 0;
-            while(i < 25){
+            let maximumRequests = 5;
+            // if(this.allAnswerButtons.length < maximumRequests) {
+            //     maximumRequests = this.allAnswerButtons.length;
+            // }
+            while(i < maximumRequests){
                 browser.waitUntil(() => {
                     return (this.allAnswerButtons[i].isDisplayed());
                 }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
