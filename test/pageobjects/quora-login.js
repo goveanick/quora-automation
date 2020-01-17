@@ -40,8 +40,9 @@ class QuoraLogin {
         }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
         console.log(this.allRequestButtons.length + 'This is where I think it Jenkins is at' );
         for(const requestButton of this.allRequestButtons) {
+            console.log('Im inside the loop');
             browser.waitUntil(() => {
-                return (requestButton.isDisplayed());
+                return (requestButton.isClickable());
             }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
             requestButton.click();
             browser.waitUntil(() => {
