@@ -38,15 +38,16 @@ class QuoraLogin {
         browser.waitUntil(() => {
             return (this.boxWith3QuestionsNeedingAnswers.isDisplayed());
         }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
-        console.log(this.allRequestButtons.length + 'This is where I think it Jenkins is at' );
+        console.log(this.allRequestButtons.length + ' This is where I think it Jenkins is at' );
         for(const requestButton of this.allRequestButtons) {
             console.log('Im inside the loop');
             browser.waitUntil(() => {
                 return (requestButton.isClickable());
             }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
             requestButton.click();
+            console.log('Im passed the click');
             browser.waitUntil(() => {
-                return (this.allAnswerButtons[0].isDisplayed());
+                return (this.allAnswerButtons[0].isClickable());
             }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
             console.log('This is the number Im on: ' + requestButton);
             console.log(this.allAnswerButtons.length);
