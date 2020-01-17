@@ -58,13 +58,13 @@ class QuoraLogin {
             // }
             while(i < maximumRequests){
                 browser.waitUntil(() => {
-                    return (this.allAnswerButtons[i].isDisplayed());
+                    return (this.allAnswerButtons[i].isClickable());
                 }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
                 this.allAnswerButtons[i].click();
                 i++;
             }
             browser.waitUntil(() => {
-                return (this.popUpCloseButton.isDisplayed());
+                return (this.popUpCloseButton.isClickable());
             }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
             this.popUpCloseButton.click()
         }
