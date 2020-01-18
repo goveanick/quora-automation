@@ -81,6 +81,7 @@ class QuoraLogin {
             browser.waitUntil(() => {
                 return (this.allRequestButtons.length = 3);
             }, 30000, 'The popup was not closed and the three questions were not displayed: ' + browser.getUrl());
+            browser.pause(5000);
         }
 
     }
