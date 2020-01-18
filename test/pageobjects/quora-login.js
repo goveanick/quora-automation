@@ -43,6 +43,9 @@ class QuoraLogin {
         browser.waitUntil(() => {
             return (this.boxWith3QuestionsNeedingAnswers.isDisplayed());
         }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
+        browser.waitUntil(() => {
+            return (this.allRequestButtons.length = 3);
+        }, 30000, 'The popup was not closed and the three questions were not displayed: ' + browser.getUrl());
 
         console.log('I\'m entering the loop, that will click on the three questions');
         let questionNumber = 1;
