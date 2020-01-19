@@ -128,7 +128,7 @@ class QuoraLogin {
         browser.waitUntil(() => {
             return (this.allRequestButtons[0].isDisplayed());
         }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
-        browser.pause(5000);
+        browser.pause(8000);
         // browser.executeScript('arguments[0].click()',  this.allRequestButtons);
         this.allRequestButtons[0].click();
         console.log('I\'ve clicked on the first question');
