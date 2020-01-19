@@ -111,8 +111,8 @@ class QuoraLogin {
     clickRequestButtons2() {
         console.log('I\'m on the page that displays the three questions');
         browser.waitUntil(() => {
-            return ($$('div[class*="PromptBundle"]').length === 7);
-        }, 30000, 'The seven category boxes on the page did not load' + browser.getUrl());
+            return ($$('div[class*="PromptBundle"]').length > 3);
+        }, 30000, 'The seven category boxes on the page did not load, instead ' + $$('div[class*="PromptBundle"]').length + ' boxes loaded\n' + browser.getUrl());
         // browser.waitUntil(() => {
         //     return (this.boxWith3QuestionsNeedingAnswers.isDisplayed());
         // }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
@@ -128,15 +128,32 @@ class QuoraLogin {
             return (this.allRequestButtons[0].isDisplayed());
         }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
         // browser.pause(5000);
+        // browser.executeScript('arguments[0].click()',  this.allRequestButtons);
         this.allRequestButtons[0].click();
         console.log('I\'ve clicked on the first question');
 
 
-        browser.waitUntil(() => {
-            return (this.popUpCloseButton.isDisplayed());
-        }, 30000, 'The close button in the popup wasn\'t displayed' + browser.getUrl());
-        this.popUpCloseButton.click();
-        console.log('I\'ve clicked on the close button of the popup');
+        try {
+            browser.waitUntil(() => {
+                return (this.popUpCloseButton.isDisplayed());
+            }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+        }
+        catch(err) {
+            console.log('I fell into the catch, should click again');
+            browser.refresh();
+            browser.waitUntil(() => {
+                return (this.allRequestButtons[0].isDisplayed());
+            }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+            this.allRequestButtons[0].click();
+            browser.waitUntil(() => {
+                return (this.popUpCloseButton.isDisplayed());
+            }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+        }
+        finally {
+            this.popUpCloseButton.click();
+            console.log('I\'ve clicked on the close button of the popup');
+        }
+
     }
 }
 
