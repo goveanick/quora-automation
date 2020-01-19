@@ -154,6 +154,23 @@ class QuoraLogin {
             console.log('moving out of the catch');
         }
         finally {
+            browser.waitUntil(() => {
+                return (this.allAnswerButtons[0].isDisplayed());
+            }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+            // console.log('This is the number Im on: ' + requestButton);
+            console.log(this.allAnswerButtons.length);
+            let i = 0;
+            let maximumRequests = 1;
+            // if(this.allAnswerButtons.length < maximumRequests) {
+            //     maximumRequests = this.allAnswerButtons.length;
+            // }
+            while(i < maximumRequests){
+                browser.waitUntil(() => {
+                    return (this.allAnswerButtons[i].isDisplayed());
+                }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+                this.allAnswerButtons[i].click();
+                i++;
+            }
             this.popUpCloseButton.click();
             console.log('I\'ve clicked on the close button of the popup');
         }
