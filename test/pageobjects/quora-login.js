@@ -75,7 +75,7 @@ class QuoraLogin {
             //     i++;
             // }
             browser.waitUntil(() => {
-                return (this.popUpCloseButton.isDisplayed());
+                return ($('div[class*="Modal Step"]').isDisplayed());
             }, 30000, 'The close button in the popup wasn\'t displayed' + browser.getUrl());
             this.popUpCloseButton.click();
             questionNumber++;
