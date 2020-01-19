@@ -1,3 +1,5 @@
+import contactUs from '../pageobjects/ta-contactus.page';
+
 class QuoraLogin {
 
     get emailField()                  { return $('div[class="form_inputs"] input[id*=email]'); }
@@ -123,7 +125,6 @@ class QuoraLogin {
         console.log('The page with the three questions should be loaded now');
         let questionNumber = 1;
 
-
         browser.waitUntil(() => {
             return (this.allRequestButtons[0].isDisplayed());
         }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
@@ -140,7 +141,9 @@ class QuoraLogin {
         }
         catch(err) {
             console.log('I fell into the catch, should click again');
-            browser.refresh();
+            contactUs.open();
+            this.clickOnFirstViewAllSuggestionsLink();
+            // browser.refresh();
             browser.waitUntil(() => {
                 return (this.allRequestButtons[0].isDisplayed());
             }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
@@ -148,6 +151,7 @@ class QuoraLogin {
             browser.waitUntil(() => {
                 return (this.popUpCloseButton.isDisplayed());
             }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+            console.log('moving out of the catch');
         }
         finally {
             this.popUpCloseButton.click();
