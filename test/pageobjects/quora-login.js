@@ -54,6 +54,7 @@ class QuoraLogin {
             browser.waitUntil(() => {
                 return (requestButton.isDisplayed());
             }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+            browser.pause(5000);
             requestButton.click();
             console.log('I\'ve clicked on question number ' + questionNumber);
             // browser.waitUntil(() => {
