@@ -9,10 +9,11 @@ describe('navigate to Quora and request answers', function() {
         QuoraLogin.enterCredentials(argv.userName, argv.passWord);
 
         let i = 0;
-        while(i < /*50*/1) {
+        while(i < 3) {
             QuoraLogin.clickOnFirstViewAllSuggestionsLink();
-            QuoraLogin.clickRequestButtons();
-            // QuoraLogin.clickRefreshButton();
+            // QuoraLogin.clickRequestButtons();
+            QuoraLogin.clickRequestButtons2();
+            QuoraLogin.clickRefreshButton();
             contactUs.open();
             i++;
         }

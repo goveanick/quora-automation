@@ -54,35 +54,35 @@ class QuoraLogin {
             browser.waitUntil(() => {
                 return (requestButton.isDisplayed());
             }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
-            browser.pause(5000);
+            // browser.pause(5000);
             requestButton.click();
             console.log('I\'ve clicked on question number ' + questionNumber);
-            // browser.waitUntil(() => {
-            //     return (this.allAnswerButtons[0].isDisplayed());
-            // }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
-            // console.log('This is the number Im on: ' + requestButton);
-            // console.log(this.allAnswerButtons.length);
-            // let i = 0;
-            // let maximumRequests = 5;
-            // // if(this.allAnswerButtons.length < maximumRequests) {
-            // //     maximumRequests = this.allAnswerButtons.length;
-            // // }
-            // while(i < maximumRequests){
-            //     browser.waitUntil(() => {
-            //         return (this.allAnswerButtons[i].isDisplayed());
-            //     }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
-            //     this.allAnswerButtons[i].click();
-            //     i++;
-            // }
             browser.waitUntil(() => {
-                return ($('div[class*="Modal Step"]').isDisplayed());
+                return (this.allAnswerButtons[0].isDisplayed());
+            }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+            console.log('This is the number Im on: ' + requestButton);
+            console.log(this.allAnswerButtons.length);
+            let i = 0;
+            let maximumRequests = 5;
+            // if(this.allAnswerButtons.length < maximumRequests) {
+            //     maximumRequests = this.allAnswerButtons.length;
+            // }
+            while(i < maximumRequests){
+                browser.waitUntil(() => {
+                    return (this.allAnswerButtons[i].isDisplayed());
+                }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+                this.allAnswerButtons[i].click();
+                i++;
+            }
+            browser.waitUntil(() => {
+                return (this.popUpCloseButton.isDisplayed());
             }, 30000, 'The close button in the popup wasn\'t displayed' + browser.getUrl());
             this.popUpCloseButton.click();
             questionNumber++;
             browser.waitUntil(() => {
                 return (this.allRequestButtons.length = 3);
             }, 30000, 'The popup was not closed and the three questions were not displayed: ' + browser.getUrl());
-            browser.pause(5000);
+            // browser.pause(5000);
         }
 
     }
@@ -105,6 +105,38 @@ class QuoraLogin {
             return (this.refreshButton.isDisplayed());
         }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
         this.refreshButton.click();
+    }
+
+
+    clickRequestButtons2() {
+        console.log('I\'m on the page that displays the three questions');
+        browser.waitUntil(() => {
+            return ($$('div[class*="PromptBundle"]').length === 7);
+        }, 30000, 'The seven category boxes on the page did not load' + browser.getUrl());
+        // browser.waitUntil(() => {
+        //     return (this.boxWith3QuestionsNeedingAnswers.isDisplayed());
+        // }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
+        browser.waitUntil(() => {
+            return (this.allRequestButtons.length === 3);
+        }, 30000, 'The three questions were not displayed on the page ' + browser.getUrl());
+
+        console.log('The page with the three questions should be loaded now');
+        let questionNumber = 1;
+
+
+        browser.waitUntil(() => {
+            return (this.allRequestButtons[0].isDisplayed());
+        }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+        // browser.pause(5000);
+        this.allRequestButtons[0].click();
+        console.log('I\'ve clicked on the first question');
+
+
+        browser.waitUntil(() => {
+            return (this.popUpCloseButton.isDisplayed());
+        }, 30000, 'The close button in the popup wasn\'t displayed' + browser.getUrl());
+        this.popUpCloseButton.click();
+        console.log('I\'ve clicked on the close button of the popup');
     }
 }
 
