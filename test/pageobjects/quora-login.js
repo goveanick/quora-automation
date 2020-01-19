@@ -126,11 +126,11 @@ class QuoraLogin {
         let questionNumber = 1;
 
         browser.waitUntil(() => {
-            return (this.allRequestButtons[0].isDisplayed());
+            return (this.allRequestButtons[1].isDisplayed());
         }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
         browser.pause(8000);
         // browser.executeScript('arguments[0].click()',  this.allRequestButtons);
-        this.allRequestButtons[0].click();
+        this.allRequestButtons[1].click();
         console.log('I\'ve clicked on the first question');
 
 
@@ -145,9 +145,9 @@ class QuoraLogin {
             this.clickOnFirstViewAllSuggestionsLink();
             // browser.refresh();
             browser.waitUntil(() => {
-                return (this.allRequestButtons[0].isDisplayed());
+                return (this.allRequestButtons[1].isDisplayed());
             }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
-            this.allRequestButtons[0].click();
+            this.allRequestButtons[1].click();
             browser.waitUntil(() => {
                 return (this.popUpCloseButton.isDisplayed());
             }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
