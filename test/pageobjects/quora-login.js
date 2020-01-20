@@ -137,7 +137,7 @@ class QuoraLogin {
         try {
             browser.waitUntil(() => {
                 return (this.popUpCloseButton.isDisplayed());
-            }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+            }, 10000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
         }
         catch(err) {
             console.log('I fell into the catch, should click again');
@@ -172,6 +172,9 @@ class QuoraLogin {
                     this.allAnswerButtons[i].click();
                     i++;
                 }
+                console.log('Sent 5 requests');
+            } else {
+                console.log('Sent 0 requests');
             }
 
             this.popUpCloseButton.click();
