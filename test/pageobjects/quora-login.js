@@ -167,8 +167,8 @@ class QuoraLogin {
                 // }
                 while(i < maximumRequests){
                     browser.waitUntil(() => {
-                        return (this.allAnswerButtons[i].isDisplayed());
-                    }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
+                        return (this.allAnswerButtons[i].isClickable());
+                    }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
                     this.allAnswerButtons[i].click();
                     i++;
                 }
