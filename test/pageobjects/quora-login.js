@@ -160,7 +160,7 @@ class QuoraLogin {
             // console.log('This is the number Im on: ' + requestButton);
             console.log(this.allAnswerButtons.length);
             let i = 0;
-            let maximumRequests = 1;
+            let maximumRequests = 5;
             // if(this.allAnswerButtons.length < maximumRequests) {
             //     maximumRequests = this.allAnswerButtons.length;
             // }
