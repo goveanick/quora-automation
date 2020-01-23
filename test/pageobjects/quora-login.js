@@ -2,16 +2,17 @@ import contactUs from '../pageobjects/ta-contactus.page';
 
 class QuoraLogin {
 
-    get emailField()                  { return $('div[class="form_inputs"] input[id*=email]'); }
-    get passwordField()               { return $('div[class="form_inputs"] input[id*=password]'); }
-    get submitButton()                { return $('div[class="form_inputs"] input[id*=submit_button]'); }
-    get viewAllSuggestions()          { return $$('div[class*="button_area u-text-align--center u-absolute"]'); }
-    get allRequestButtons()           { return $$('div[class*="A2APromptBundle"] div[class*="item_action"]'); }
-    get boxWith3QuestionsNeedingAnswers()           { return $('div[class*="A2APromptBundle"]'); }
-    get popUpCloseButton()            { return $('g[id="small_close"]'); }
-    get allAnswerButtons()            { return $$('div[class="WantedAnswerSuggestions"] div[id*="request_button"]'); }
-    get refreshButton()               { return $('div[class*="A2APromptBundle"] div[class*="RefreshA2AQuestionListActionItem"] span[id*="label"]'); }
-    get requestAnswerBoxOnPartnerPage() { return $('div[class*="PartnerPromptsQuestionCarouselItem"]'); }
+    get emailField()                        { return $('div[class="form_inputs"] input[id*=email]'); }
+    get passwordField()                     { return $('div[class="form_inputs"] input[id*=password]'); }
+    get submitButton()                      { return $('div[class="form_inputs"] input[id*=submit_button]'); }
+    get viewAllSuggestions()                { return $$('div[class*="button_area u-text-align--center u-absolute"]'); }
+    get allRequestButtons()                 { return $$('div[class*="A2APromptBundle"] div[class*="item_action"]'); }
+    get boxWith3QuestionsNeedingAnswers()   { return $('div[class*="A2APromptBundle"]'); }
+    get popUpCloseButton()                  { return $('g[id="small_close"]'); }
+    get allAnswerButtons()                  { return $$('div[class="WantedAnswerSuggestions"] div[id*="request_button"]'); }
+    get refreshButton()                     { return $('div[class*="A2APromptBundle"] div[class*="RefreshA2AQuestionListActionItem"] span[id*="label"]'); }
+    get requestAnswerBoxOnPartnerPage()     { return $('div[class*="PartnerPromptsQuestionCarouselItem"]'); }
+    get popUpTitle()                        { return $('div[class*="a2a_question_text"]'); }
 
 
     setEmailField(email) {
@@ -159,7 +160,7 @@ class QuoraLogin {
             // }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
             // console.log('This is the number Im on: ' + requestButton);
             console.log(this.allAnswerButtons.length);
-            if (this.allAnswerButtons.length > 0) {
+            if (this.allAnswerButtons.length > 1) {
                 let i = 0;
                 let maximumRequests = 5;
                 // if(this.allAnswerButtons.length < maximumRequests) {
@@ -175,6 +176,7 @@ class QuoraLogin {
                 console.log('Sent 5 requests');
             } else {
                 console.log('Sent 0 requests');
+                console.log('$$$$>>>>>>>>>>>> POPUP TITLE: ' + this.popUpTitle.getText());
             }
 
             this.popUpCloseButton.click();
