@@ -176,6 +176,11 @@ class QuoraLogin {
                 console.log('Sent 5 requests');
             } else {
                 console.log('Sent 0 requests');
+                browser.refresh();
+                browser.waitUntil(() => {
+                    return (this.allRequestButtons[1].isDisplayed());
+                }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+                this.allRequestButtons[1].click();
                 console.log('$$$$>>>>>>>>>>>> POPUP TITLE: ' + this.popUpTitle.getText());
             }
 
