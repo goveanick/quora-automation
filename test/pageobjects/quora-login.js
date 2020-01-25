@@ -182,6 +182,10 @@ class QuoraLogin {
                 }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
                 this.allRequestButtons[1].click();
                 console.log('$$$$>>>>>>>>>>>> POPUP TITLE: ' + this.popUpTitle.getText());
+                browser.waitUntil(() => {
+                    this.allRequestButtons[1].click();
+                    return (this.popUpCloseButton.isClickable());
+                }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
             }
 
             this.popUpCloseButton.click();
