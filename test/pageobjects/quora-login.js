@@ -184,7 +184,7 @@ class QuoraLogin {
                 if (!this.popUpCloseButton.isClickable()) {
                     browser.waitUntil(() => {
                         this.allRequestButtons[1].click();
-                        return (this.popUpCloseButton.isClickable());
+                        return (this.popUpCloseButton.isEnabled());
                     }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
                 } else {
                     browser.waitUntil(() => {
