@@ -15,14 +15,6 @@ class QuoraLogin {
     get popUpTitle()                        { return $('div[class*="a2a_question_text"]'); }
 
 
-    setEmailField(email) {
-        this.emailField.setValue(email);
-    }
-
-    setPasswordField(password) {
-        this.passwordField.setValue(password);
-    }
-
     enterCredentials(email, password) {
         console.log('I\'m logging in');
         this.emailField.setValue(email);
@@ -113,90 +105,94 @@ class QuoraLogin {
 
     clickRequestButtons2() {
         console.log('I\'m on the page that displays the three questions');
-        browser.waitUntil(() => {
-            return ($$('div[class*="PromptBundle"]').length > 3);
-        }, 30000, 'The seven category boxes on the page did not load, instead ' + $$('div[class*="PromptBundle"]').length + ' boxes loaded\n' + browser.getUrl());
         // browser.waitUntil(() => {
-        //     return (this.boxWith3QuestionsNeedingAnswers.isDisplayed());
-        // }, 30000, 'The box that displayed 3 questions needing answers was not displayed' + browser.getUrl());
-        browser.waitUntil(() => {
-            return (this.allRequestButtons.length === 3);
-        }, 30000, 'The three questions were not displayed on the page ' + browser.getUrl());
+        //     return ($$('div[class*="PromptBundle"]').length > 3);
+        // }, 30000, 'The seven category boxes on the page did not load, instead ' + $$('div[class*="PromptBundle"]').length + ' boxes loaded\n' + browser.getUrl());
+        // browser.waitUntil(() => {
+        //     return (this.allRequestButtons.length === 3);
+        // }, 30000, 'The three questions were not displayed on the page ' + browser.getUrl());
 
         console.log('The page with the three questions should be loaded now');
         let questionNumber = 1;
 
-        browser.waitUntil(() => {
-            return (this.allRequestButtons[1].isDisplayed());
-        }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
-        browser.pause(4000);
-        // browser.executeScript('arguments[0].click()',  this.allRequestButtons);
+        // browser.waitUntil(() => {
+        //     return (this.allRequestButtons[1].isDisplayed());
+        // }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+        // browser.pause(4000);
+        this.allRequestButtons[1].waitForDisplayed(30000);
+        this.allRequestButtons[1].waitForExist(30000);
+        this.allRequestButtons[1].waitForEnabled(30000);
         this.allRequestButtons[1].click();
         console.log('I\'ve clicked on the first question');
 
 
         try {
-            browser.waitUntil(() => {
-                return (this.popUpCloseButton.isDisplayed());
-            }, 10000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+            // browser.waitUntil(() => {
+            //     return (this.popUpCloseButton.isDisplayed());
+            // }, 10000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+            // this.popUpCloseButton.waitForDisplayed(30000);
+            // this.popUpCloseButton.waitForExist(30000);
+            // this.popUpCloseButton.waitForEnabled(30000);
         }
         catch(err) {
             console.log('I fell into the catch, should click again');
             contactUs.open();
             this.clickOnFirstViewAllSuggestionsLink();
             // browser.refresh();
-            browser.waitUntil(() => {
-                return (this.allRequestButtons[1].isDisplayed());
-            }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+            // browser.waitUntil(() => {
+            //     return (this.allRequestButtons[1].isDisplayed());
+            // }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+            this.allRequestButtons[1].waitForDisplayed(30000);
+            this.allRequestButtons[1].waitForExist(30000);
+            this.allRequestButtons[1].waitForEnabled(30000);
             this.allRequestButtons[1].click();
-            browser.waitUntil(() => {
-                return (this.popUpCloseButton.isDisplayed());
-            }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+            // browser.waitUntil(() => {
+            //     return (this.popUpCloseButton.isDisplayed());
+            // }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
+            this.allRequestButtons[1].waitForDisplayed(30000);
+            this.allRequestButtons[1].waitForExist(30000);
+            this.allRequestButtons[1].waitForEnabled(30000);
             console.log('moving out of the catch');
         }
-        finally {
-            // browser.waitUntil(() => {
-            //     return (this.allAnswerButtons[0].isDisplayed());
-            // }, 30000, 'iframe did not load correctly: ' + browser.getUrl());
-            // console.log('This is the number Im on: ' + requestButton);
-            console.log(this.allAnswerButtons.length);
-            if (this.allAnswerButtons.length > 1) {
-                let i = 0;
-                let maximumRequests = 5;
-                // if(this.allAnswerButtons.length < maximumRequests) {
-                //     maximumRequests = this.allAnswerButtons.length;
-                // }
-                while(i < maximumRequests){
-                    browser.waitUntil(() => {
-                        return (this.allAnswerButtons[i].isClickable());
-                    }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
-                    this.allAnswerButtons[i].click();
-                    i++;
-                }
-                console.log('Sent 5 requests');
-            } else {
-                console.log('Sent 0 requests');
-                browser.refresh();
-                browser.waitUntil(() => {
-                    return (this.allRequestButtons[1].isDisplayed());
-                }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
-                this.allRequestButtons[1].click();
-                if (!this.popUpCloseButton.isClickable()) {
-                    browser.waitUntil(() => {
-                        this.allRequestButtons[1].click();
-                        return (this.popUpCloseButton.isEnabled());
-                    }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
-                } else {
-                    browser.waitUntil(() => {
-                        return (this.popUpCloseButton.isClickable());
-                    }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
-                }
-                // console.log('$$$$>>>>>>>>>>>> POPUP TITLE: ' + this.popUpTitle.getText());
-            }
+        // finally {
+        //     console.log(this.allAnswerButtons.length);
+        //     if (this.allAnswerButtons.length > 10000) {
+        //         let i = 0;
+        //         let maximumRequests = 5;
+        //         while(i < maximumRequests){
+        //             browser.waitUntil(() => {
+        //                 return (this.allAnswerButtons[i].isClickable());
+        //             }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+        //             this.allAnswerButtons[i].click();
+        //             i++;
+        //         }
+        //         console.log('Sent 5 requests');
+        //     } else {
+        //         console.log('Sent 0 requests');
+        //         browser.refresh();
+        //         browser.waitUntil(() => {
+        //             return (this.allRequestButtons[1].isDisplayed());
+        //         }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
+        //         this.allRequestButtons[1].click();
+        //         if (!this.popUpCloseButton.isClickable()) {
+        //             browser.waitUntil(() => {
+        //                 this.allRequestButtons[1].click();
+        //                 return (this.popUpCloseButton.isEnabled());
+        //             }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+        //         } else {
+        //             browser.waitUntil(() => {
+        //                 return (this.popUpCloseButton.isClickable());
+        //             }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+        //         }
+        //         // console.log('$$$$>>>>>>>>>>>> POPUP TITLE: ' + this.popUpTitle.getText());
+        //     }
+        //
+        //     this.popUpCloseButton.click();
+        //     console.log('I\'ve clicked on the close button of the popup');
+        // }
 
             this.popUpCloseButton.click();
             console.log('I\'ve clicked on the close button of the popup');
-        }
 
     }
 }
