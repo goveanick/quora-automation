@@ -149,9 +149,9 @@ class QuoraLogin {
             // browser.waitUntil(() => {
             //     return (this.popUpCloseButton.isDisplayed());
             // }, 30000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
-            this.allRequestButtons[1].waitForDisplayed(30000);
-            this.allRequestButtons[1].waitForExist(30000);
-            this.allRequestButtons[1].waitForEnabled(30000);
+            this.popUpCloseButton.waitForDisplayed(30000);
+            this.popUpCloseButton.waitForExist(30000);
+            this.popUpCloseButton.waitForEnabled(30000);
             console.log('moving out of the catch');
         }
         // finally {
