@@ -180,12 +180,18 @@ class QuoraLogin {
                 browser.waitUntil(() => {
                     return (this.allRequestButtons[1].isDisplayed());
                 }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
-                // this.allRequestButtons[1].click();
+                this.allRequestButtons[1].click();
+                if (!this.popUpCloseButton.isClickable()) {
+                    browser.waitUntil(() => {
+                        this.allRequestButtons[1].click();
+                        return (this.popUpCloseButton.isClickable());
+                    }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+                } else {
+                    browser.waitUntil(() => {
+                        return (this.popUpCloseButton.isClickable());
+                    }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+                }
                 // console.log('$$$$>>>>>>>>>>>> POPUP TITLE: ' + this.popUpTitle.getText());
-                browser.waitUntil(() => {
-                    this.allRequestButtons[1].click();
-                    return (this.popUpCloseButton.isClickable());
-                }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
             }
 
             this.popUpCloseButton.click();
