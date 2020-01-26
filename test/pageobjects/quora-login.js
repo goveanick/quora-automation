@@ -123,12 +123,14 @@ class QuoraLogin {
         this.allRequestButtons[1].waitForExist(30000);
         this.allRequestButtons[1].waitForEnabled(30000);
         // this.allRequestButtons[1].click();
-        console.log('I\'ve clicked on the first question');
+        // console.log('I\'ve clicked on the first question');
 
 
         try {
             browser.waitUntil(() => {
+                console.log('im going to try clicking');
                 this.allRequestButtons[1].click();
+                console.log('I\'ve clicked on the first question');
                 return (this.popUpCloseButton.isDisplayed());
             }, 10000, 'The close button in the popup wasn\'t displayed\n' + browser.getUrl());
             this.popUpCloseButton.waitForDisplayed(30000);

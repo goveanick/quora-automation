@@ -2,6 +2,8 @@
 const defaultTimeoutInterval  = process.env.DEBUG ? (60 * 60 * 500) : 90000;
 const yargs = require('yargs');
 const argv = yargs.argv;
+const video = require('wdio-video-reporter');
+
 
 exports.config = {
     //
@@ -160,6 +162,10 @@ exports.config = {
     },
 
     reporters: [
+        [video, {
+            saveAllVideos: false,       // If true, also saves videos for successful test cases
+            videoSlowdownMultiplier: 3, // Higher to get slower videos, lower for faster videos [Value 1-100]
+        }],
         'spec',
         ['junit', {
             outputDir: './test/reports/junit-results/',
