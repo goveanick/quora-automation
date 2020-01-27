@@ -216,7 +216,7 @@ class QuoraLogin {
         //     return (this.allRequestButtons[1].isDisplayed());
         // }, 30000, 'The request button for question number '+ questionNumber + ' was not displayed.\n' + browser.getUrl());
         // browser.pause(4000);
-        this.allRequestButtons[1].waitForDisplayed(30000);
+        // this.allRequestButtons[1].waitForDisplayed(30000);
         this.allRequestButtons[1].waitForExist(30000);
         this.allRequestButtons[1].waitForEnabled(30000);
         this.allRequestButtons[1].click();
@@ -296,7 +296,7 @@ class QuoraLogin {
 
     closeButtonPopUpVisible() {
         try {
-            this.popUpCloseButton.waitForDisplayed(30000);
+            this.popUpCloseButton.waitForDisplayed(10000);
             return true;
         }
         catch (err) {
