@@ -9,7 +9,7 @@ describe('navigate to Quora and request answers', function() {
         QuoraLogin.enterCredentials(argv.userName, argv.passWord);
 
         let i = 0;
-        while(i < 15) {
+        while(i < 30) {
             console.log('@@@@@@@@@@@@@ THIS IS RUN NUMBER: ' + i + ' @@@@@@@@@@@@@@@@@@@@@');
             QuoraLogin.clickOnFirstViewAllSuggestionsLink();
             // QuoraLogin.clickRequestButtons();
