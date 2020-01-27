@@ -13,7 +13,8 @@ describe('navigate to Quora and request answers', function() {
             console.log('@@@@@@@@@@@@@ THIS IS RUN NUMBER: ' + i + ' @@@@@@@@@@@@@@@@@@@@@');
             QuoraLogin.clickOnFirstViewAllSuggestionsLink();
             // QuoraLogin.clickRequestButtons();
-            QuoraLogin.clickRequestButtons2();
+            // QuoraLogin.clickRequestButtons2();
+            QuoraLogin.clickRequestButtons3();
             QuoraLogin.clickRefreshButton();
             contactUs.open();
             i++;
