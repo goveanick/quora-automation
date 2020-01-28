@@ -9,11 +9,12 @@ describe('navigate to Quora and request answers', function() {
         QuoraLogin.enterCredentials(argv.userName, argv.passWord);
 
         let i = 0;
-        while(i < 30) {
+        // I'm using 38 as the value here because this will run 4 times a day
+        // which means ((38 questions * 5 requests) * 4 times) = 760 requests and 152 questions
+        while(i < 38) {
             console.log('@@@@@@@@@@@@@ THIS IS RUN NUMBER: ' + i + ' @@@@@@@@@@@@@@@@@@@@@');
             QuoraLogin.clickOnFirstViewAllSuggestionsLink();
             // QuoraLogin.clickRequestButtons();
-            // QuoraLogin.clickRequestButtons2();
             QuoraLogin.clickRequestButtons3();
             QuoraLogin.clickRefreshButton();
             contactUs.open();
