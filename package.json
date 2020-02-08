@@ -2,7 +2,6 @@
   "name": "webdriverIO-with-jasmineBDD",
   "version": "2.0.0",
   "description": "WebDriverIO-v5 bindings for Node.js with Jasmine",
-  "main": "index.js",
   "scripts": {
     "node-inspector": "node-inspector --debug-port 5859 --no-preload",
     "test": "node node_modules/.bin/wdio ./test/config/suite.jasmine.conf.js",
