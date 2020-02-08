@@ -3,22 +3,21 @@ import QuoraLogin from '../pageobjects/quora-login';
 const yargs = require('yargs');
 const argv = yargs.argv;
 
-describe('navigate to Quora and request answers', function() {
+xdescribe('navigate to Quora in SPANISH and request answers', function() {
     it('should request answers of most popular questions ', function () {
-        contactUs.open();// navigating to login page
+        browser.url('https://es.quora.com/answer');
+        // contactUs.open();// navigating to login page
         QuoraLogin.enterCredentials(argv.userName, argv.passWord);
 
         let i = 0;
         // I'm using 38 as the value here because this will run 4 times a day
         // which means ((38 questions * 5 requests) * 4 times) = 760 requests and 152 questions
-        while(i < 38) {
-            console.log('@@@@@@@@@@@@@ THIS IS RUN NUMBER: ' + i + ' @@@@@@@@@@@@@@@@@@@@@');
-            QuoraLogin.clickOnFirstViewAllSuggestionsLink();
-            QuoraLogin.clickRequestButtons3();
-            // QuoraLogin.clickRequestButtons4();
-            QuoraLogin.clickRefreshButton();
-            contactUs.open();
+        while(i < 3) {
+            browser.pause(7000);
+            browser.deleteCookies();
+            browser.refresh();
             i++;
         }
+
     });
 });
