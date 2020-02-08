@@ -93,6 +93,7 @@ class QuoraLogin {
     clickRequestButtons3() {
         console.log('I\'m on the page that displays the three questions');
         console.log('The page with the three questions should be loaded now');
+        this.allRequestButtons[0].waitForDisplayed(30000);
         this.allRequestButtons[1].waitForExist(30000);
         this.allRequestButtons[1].waitForEnabled(30000);
         this.allRequestButtons[1].click();
@@ -124,7 +125,7 @@ class QuoraLogin {
                     let maximumRequests = 5;
                     while(i < maximumRequests){
                         browser.waitUntil(() => {
-                            return (this.allAnswerButtons[i].isClickable());
+                            return (this.allAnswerButtons[i].isDisplayed());
                         }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
                         this.allAnswerButtons[i].click();
                         i++;
