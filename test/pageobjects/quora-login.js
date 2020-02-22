@@ -12,6 +12,7 @@ class QuoraLogin {
     get refreshButton()                     { return $('div[class*="A2APromptBundle"] div[class*="RefreshA2AQuestionListActionItem"] span[id*="label"]'); }
     get requestAnswerBoxOnPartnerPage()     { return $('div[class*="PartnerPromptsQuestionCarouselItem"]'); }
     get popUpTitle()                        { return $('div[class*="a2a_question_text"]'); }
+    get popupInViewPort()                   { return $('body[class*="modal_prevent_scroll"]'); }
 
 
     enterCredentials(email, password) {
@@ -158,11 +159,17 @@ class QuoraLogin {
 
     closeButtonPopUpVisible() {
         try {
-            this.popUpCloseButton.waitForDisplayed(10000);
+            browser.waitUntil(() => {
+                return (this.popupInViewPort.isDisplayed());
+            }, 10000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+            browser.waitUntil(() => {
+                return (this.popUpCloseButton.isDisplayed());
+            }, 10000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+            // this.popUpCloseButton.waitForDisplayed(10000);
             return true;
         }
         catch (err) {
-            console.log('The popup wasnt displayed');
+            console.log('The popup wasn\'t displayed');
             return false;
         }
     }
