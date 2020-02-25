@@ -11,10 +11,10 @@ describe('navigate to Quora and request answers', function() {
         let i = 0;
         // I'm using 38 as the value here because this will run 4 times a day
         // which means ((38 questions * 5 requests) * 4 times) = 760 requests and 152 questions
-        while(i < 38) {
+        while(i < 1) {
             console.log('@@@@@@@@@@@@@ THIS IS RUN NUMBER: ' + i + ' @@@@@@@@@@@@@@@@@@@@@');
             QuoraLogin.clickOnFirstViewAllSuggestionsLink();
-            QuoraLogin.clickRequestButtons3();
+            //QuoraLogin.clickRequestButtons3();
             // QuoraLogin.clickRequestButtons4();
             QuoraLogin.clickRefreshButton();
             contactUs.open();

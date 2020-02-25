@@ -1,4 +1,5 @@
 import contactUs from '../pageobjects/ta-contactus.page';
+const { percySnapshot } = require('@percy/webdriverio');
 
 class QuoraLogin {
 
@@ -28,6 +29,9 @@ class QuoraLogin {
             return (this.requestAnswerBoxOnPartnerPage.isDisplayed());
         }, 30000, 'The box on the Partner\'s page that leads to the questions ' +
             'that needs more answers was not displayed' + browser.getUrl());
+        browser.call(() =>
+            percySnapshot(browser, 'sample'),
+        );
         this.viewAllSuggestions[0].click();
         console.log('I\'ve clicked on the view all suggestions button on the partner homepage');
     }
