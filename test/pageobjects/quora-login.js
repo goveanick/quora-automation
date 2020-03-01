@@ -45,10 +45,6 @@ class QuoraLogin {
     clickRequestButtons3() {
         console.log('I\'m on the page that displays the three questions');
         console.log('The page with the three questions should be loaded now');
-        // this.allRequestButtons[0].waitForDisplayed(30000);
-        // this.allRequestButtons[1].waitForExist(30000);
-        // this.allRequestButtons[1].waitForEnabled(30000);
-        // this.allRequestButtons[1].click();
         if (this.checkIfTheThreeQuestionsAreDisplayed()) {
             this.allRequestButtons[1].click();
             console.log('I\'ve clicked on the first question');
@@ -78,11 +74,15 @@ class QuoraLogin {
                         let i = 0;
                         let maximumRequests = 5;
                         while(i < maximumRequests){
-                            browser.waitUntil(() => {
-                                return (this.allAnswerButtons[i].isDisplayed());
-                            }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
-                            this.allAnswerButtons[i].click();
-                            i++;
+                            if (this.allRequestButtonsAreDisplayed(i)) {
+                                console.log('I\'m in the new if statement');
+                                this.allAnswerButtons[i].click();
+                                i++;
+                            } else {
+                                console.log('Trying again! - The individual requests buttons in the modal were not displayed');
+                                browser.refresh();
+                                this.clickRequestButtons3();
+                            }
                         }
                         console.log('Sent 5 requests');
                     } else {
@@ -92,7 +92,7 @@ class QuoraLogin {
                     console.log('I\'ve clicked on the close button of the popup');
                 }
             } else {
-                console.log('Trying again! - The popup was not displayed after clicking on one of the three quesitions');
+                console.log('Trying again! - The popup was not displayed after clicking on one of the three questions');
                 browser.refresh();
                 this.clickRequestButtons3();
             }
@@ -100,6 +100,20 @@ class QuoraLogin {
             console.log('Trying again! - The page loaded and the three questions needing answers did not load');
             browser.refresh();
             this.clickRequestButtons3();
+        }
+
+    }
+
+    allRequestButtonsAreDisplayed (i) {
+        try {
+            browser.waitUntil(() => {
+                return (this.allAnswerButtons[i].isDisplayed());
+            }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
+            return true;
+        } catch (e) {
+            console.log('The individual requests buttons in the modal were not displayed');
+            return false;
+
         }
 
     }
@@ -199,26 +213,3 @@ class QuoraLogin {
 
 
 export default new QuoraLogin();
-
-
-
-// while(i < maximumRequests){
-//     // while(i < this.allAnswerButtons.length){
-//     for (let myRequest of this.allRequestButtons) {
-//
-//     }
-//     browser.waitUntil(() => {
-//         return (this.allAnswerButtons[i].isClickable());
-//     }, 20000, 'The individual request buttons were not clickable: ' + browser.getUrl());
-//     let special = $$('div[class*="WantedAnswersSuggestionsPagedList"] div[class*="metadata"]')[i].getText().replace(/([^0-9])/g,'');
-//     // console.log($$('div[class*="WantedAnswersSuggestionsPagedList"] div[class*="metadata"]')[i].getText().replace(/([^0-9])/g,''));
-//     //this.allAnswerButtons[i].click();
-//     // i++;
-//     if (special > 50){
-//         console.log('These are special: ' + special);
-//         i++;
-//     } else {
-//         console.log('These are NOT special: ' + special);
-//         i++;
-//     }
-// }
