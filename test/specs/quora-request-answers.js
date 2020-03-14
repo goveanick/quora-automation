@@ -1,12 +1,12 @@
-import contactUs from '../pageobjects/ta-contactus.page';
+import NavigateTo from '../pageobjects/navigation.page';
 import QuoraLogin from '../pageobjects/quora-login';
 const yargs = require('yargs');
 const argv = yargs.argv;
 
 describe('navigate to Quora and request answers', function() {
     it('should request answers of most popular questions ', function () {
-        contactUs.open();// navigating to login page
-        QuoraLogin.enterCredentials(argv.userName, argv.passWord);
+        NavigateTo.thePartnersPage();
+        QuoraLogin.enterCredentialsAtLoginPage(argv.userName, argv.passWord);
 
         let i = 0;
         // I'm using 38 as the value here because this will run 4 times a day
@@ -16,7 +16,7 @@ describe('navigate to Quora and request answers', function() {
             QuoraLogin.clickOnFirstViewAllSuggestionsLink();
             QuoraLogin.clickRequestButtons();
             QuoraLogin.clickRefreshButton();
-            contactUs.open();
+            NavigateTo.thePartnersPage();
             i++;
         }
     });

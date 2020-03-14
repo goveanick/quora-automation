@@ -1,4 +1,4 @@
-import contactUs from '../pageobjects/ta-contactus.page';
+import contactUs from './navigation.page';
 
 class QuoraLogin {
 
@@ -14,7 +14,7 @@ class QuoraLogin {
     get popupInViewPort()                   { return $('body[class*="modal_prevent_scroll"]'); }
 
 
-    enterCredentials(email, password) {
+    enterCredentialsAtLoginPage(email, password) {
         console.log('I\'m logging in');
         this.emailField.setValue(email);
         this.passwordField.setValue(password);

@@ -1,4 +1,4 @@
-import contactUs from '../pageobjects/ta-contactus.page';
+import contactUs from '../pageobjects/navigation.page';
 import QuoraLogin from '../pageobjects/quora-login';
 const yargs = require('yargs');
 const argv = yargs.argv;
