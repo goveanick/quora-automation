@@ -11,7 +11,6 @@ class QuoraLogin {
     get allAnswerButtons()                  { return $$('div[class="WantedAnswerSuggestions"] div[id*="request_button"]'); }
     get refreshButton()                     { return $('div[class*="A2APromptBundle"] div[class*="RefreshA2AQuestionListActionItem"] span[id*="label"]'); }
     get requestAnswerBoxOnPartnerPage()     { return $('div[class*="PartnerPromptsQuestionCarouselItem"]'); }
-    get popUpTitle()                        { return $('div[class*="a2a_question_text"]'); }
     get popupInViewPort()                   { return $('body[class*="modal_prevent_scroll"]'); }
 
 
@@ -42,7 +41,7 @@ class QuoraLogin {
     }
 
 
-    clickRequestButtons3() {
+    clickRequestButtons() {
         console.log('I\'m on the page that displays the three questions');
         console.log('The page with the three questions should be loaded now');
         if (this.checkIfTheThreeQuestionsAreDisplayed()) {
@@ -81,7 +80,7 @@ class QuoraLogin {
                             } else {
                                 console.log('Trying again! - The individual requests buttons in the modal were not displayed');
                                 browser.refresh();
-                                this.clickRequestButtons3();
+                                this.clickRequestButtons();
                             }
                         }
                         console.log('Sent 5 requests');
@@ -94,12 +93,12 @@ class QuoraLogin {
             } else {
                 console.log('Trying again! - The popup was not displayed after clicking on one of the three questions');
                 browser.refresh();
-                this.clickRequestButtons3();
+                this.clickRequestButtons();
             }
         } else {
             console.log('Trying again! - The page loaded and the three questions needing answers did not load');
             browser.refresh();
-            this.clickRequestButtons3();
+            this.clickRequestButtons();
         }
 
     }
@@ -117,68 +116,6 @@ class QuoraLogin {
         }
 
     }
-
-    clickRequestButtons4() {
-        console.log('I\'m on the page that displays the three questions');
-        console.log('The page with the three questions should be loaded now');
-        this.allRequestButtons[1].waitForExist(30000);
-        this.allRequestButtons[1].waitForEnabled(30000);
-        console.log($$('div[class*="A2APromptBundle"] div[class*=meta_items]')[1].getText())
-        this.allRequestButtons[1].click();
-        console.log('I\'ve clicked on the first question');
-        console.log('This is the value of the new method: ' + this.closeButtonPopUpVisible());
-        if (this.closeButtonPopUpVisible() && this.popUpCloseButton.isEnabled()) {
-            try {
-                this.popUpCloseButton.waitForDisplayed(30000);
-                this.popUpCloseButton.waitForExist(30000);
-                this.popUpCloseButton.waitForEnabled(30000);
-            }
-            catch(err) {
-                console.log('I fell into the catch, should click again');
-                contactUs.open();
-                this.clickOnFirstViewAllSuggestionsLink();
-                this.allRequestButtons[1].waitForDisplayed(30000);
-                this.allRequestButtons[1].waitForExist(30000);
-                this.allRequestButtons[1].waitForEnabled(30000);
-                this.allRequestButtons[1].click();
-                this.popUpCloseButton.waitForDisplayed(30000);
-                this.popUpCloseButton.waitForExist(30000);
-                this.popUpCloseButton.waitForEnabled(30000);
-                console.log('moving out of the catch');
-            }
-            finally {
-                console.log(this.allAnswerButtons.length);
-                if (this.allAnswerButtons.length > 5) {
-                    let i = 0;
-                    let maximumRequests = 5;
-                    for(let myRequest of this.allRequestButtons) {
-                        let special = $$('div[class*="WantedAnswersSuggestionsPagedList"] div[class*="metadata"]')[i].getText().replace(/([^0-9])/g,'');
-                        // console.log($$('div[class*="WantedAnswersSuggestionsPagedList"] div[class*="metadata"]')[i].getText().replace(/([^0-9])/g,''));
-                        //this.allAnswerButtons[i].click();
-                        // i++;
-                        if (special > 50){
-                            console.log('These are special: ' + special);
-                            i++;
-                        } else {
-                            console.log('These are NOT special: ' + special);
-                            i++;
-                        }
-                    }
-
-                    console.log('Sent 5 requests');
-                } else {
-                    console.log('Sent 0 requests');
-                }
-                this.popUpCloseButton.click();
-                console.log('I\'ve clicked on the close button of the popup');
-            }
-        } else {
-            console.log('Trying again!');
-            browser.refresh();
-            this.clickRequestButtons3();
-        }
-    }
-
     closeButtonPopUpVisible() {
         try {
             browser.waitUntil(() => {
@@ -187,7 +124,6 @@ class QuoraLogin {
             browser.waitUntil(() => {
                 return (this.popUpCloseButton.isDisplayed());
             }, 10000, 'The individual request buttons were not clickable: ' + browser.getUrl());
-            // this.popUpCloseButton.waitForDisplayed(10000);
             return true;
         }
         catch (err) {

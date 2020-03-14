@@ -14,8 +14,7 @@ describe('navigate to Quora and request answers', function() {
         while(i < 38) {
             console.log('@@@@@@@@@@@@@ THIS IS RUN NUMBER: ' + i + ' @@@@@@@@@@@@@@@@@@@@@');
             QuoraLogin.clickOnFirstViewAllSuggestionsLink();
-            QuoraLogin.clickRequestButtons3();
-            // QuoraLogin.clickRequestButtons4();
+            QuoraLogin.clickRequestButtons();
             QuoraLogin.clickRefreshButton();
             contactUs.open();
             i++;
