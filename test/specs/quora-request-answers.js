@@ -1,5 +1,6 @@
 import NavigateTo from '../pageobjects/navigation.page';
 import QuoraLogin from '../pageobjects/quora-login';
+import PartnerHomepageObject from '../pageobjects/partner-homepage.page';
 const yargs = require('yargs');
 const argv = yargs.argv;
 
@@ -13,7 +14,7 @@ describe('navigate to Quora and request answers', function() {
         // which means ((38 questions * 5 requests) * 4 times) = 760 requests and 152 questions
         while(i < 38) {
             console.log('@@@@@@@@@@@@@ THIS IS RUN NUMBER: ' + i + ' @@@@@@@@@@@@@@@@@@@@@');
-            QuoraLogin.clickOnFirstViewAllSuggestionsLink();
+            PartnerHomepageObject.clickOnFirstViewAllSuggestionsLink();
             QuoraLogin.clickRequestButtons();
             QuoraLogin.clickRefreshButton();
             NavigateTo.thePartnersPage();

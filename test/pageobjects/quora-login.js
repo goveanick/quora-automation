@@ -22,17 +22,6 @@ class QuoraLogin {
         console.log('I\'ve logged in');
     }
 
-    clickOnFirstViewAllSuggestionsLink() {
-        console.log('I\'m on the partner homepage');
-        browser.waitUntil(() => {
-            return (this.requestAnswerBoxOnPartnerPage.isDisplayed());
-        }, 30000, 'The box on the Partner\'s page that leads to the questions ' +
-            'that needs more answers was not displayed' + browser.getUrl());
-        this.viewAllSuggestions[0].click();
-        console.log('I\'ve clicked on the view all suggestions button on the partner homepage');
-    }
-
-
     clickRefreshButton() {
         browser.waitUntil(() => {
             return (this.refreshButton.isDisplayed());
