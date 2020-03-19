@@ -1,15 +1,7 @@
 class PartnerHomepage {
 
-    get emailField()                        { return $('div[class="form_inputs"] input[id*=email]'); }
-    get passwordField()                     { return $('div[class="form_inputs"] input[id*=password]'); }
-    get submitButton()                      { return $('div[class="form_inputs"] input[id*=submit_button]'); }
     get viewAllSuggestions()                { return $$('div[class*="button_area u-text-align--center u-absolute"]'); }
-    get allRequestButtons()                 { return $$('div[class*="A2APromptBundle"] div[class*="item_action"]'); }
-    get popUpCloseButton()                  { return $('g[id="small_close"]'); }
-    get allAnswerButtons()                  { return $$('div[class="WantedAnswerSuggestions"] div[id*="request_button"]'); }
-    get refreshButton()                     { return $('div[class*="A2APromptBundle"] div[class*="RefreshA2AQuestionListActionItem"] span[id*="label"]'); }
     get requestAnswerBoxOnPartnerPage()     { return $('div[class*="PartnerPromptsQuestionCarouselItem"]'); }
-    get popupInViewPort()                   { return $('body[class*="modal_prevent_scroll"]'); }
 
 
     clickOnFirstViewAllSuggestionsLink() {
