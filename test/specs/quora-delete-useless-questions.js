@@ -2,8 +2,8 @@ import QuoraLogin from '../pageobjects/quora-login';
 const yargs = require('yargs');
 const argv = yargs.argv;
 
-describe('navigate to Quora in SPANISH and request answers', function() {
-    it('should request answers of most popular questions ', function () {
+describe('navigate to Quora partner profile', function() {
+    it('should delete the questions that are not earning and have no views ', function () {
         browser.url('https://www.quora.com/partners');
         QuoraLogin.enterCredentialsAtLoginPage(argv.userName, argv.passWord);
         browser.pause(2000);
