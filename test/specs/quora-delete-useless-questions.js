@@ -13,9 +13,9 @@ describe('navigate to Quora partner profile', function() {
         console.log('This is the number of questions displayed by default: ' + numberQuestionOptions);
         let i = 10;
         let numDeleted = 0;
-        while (i < 100) {
+        while (i < 200) {
             $$('a[aria-label="More options"]')[i].scrollIntoView(false);
-            if (i < 60) {
+            if (i < 79) {
                 console.log('Question: ' + i);
                 browser.pause(1500);
                 i= i +3;
