@@ -9,26 +9,29 @@ describe('navigate to Quora partner profile', function() {
         browser.pause(2000);
         browser.url('https://www.quora.com/profile/Francisco-Blanco-33/questions');
         browser.pause(2000);
-        const numberQuestionOptions = $$('a[aria-label="More options"]').length;
+        const numberQuestionOptions = $$('span[class*="IconWrapper"] g[id="overflow"]').length;
         console.log('This is the number of questions displayed by default: ' + numberQuestionOptions);
-        let i = 10;
+        let i = 8;
         let numDeleted = 0;
-        while (i < 213) {
-            $$('a[aria-label="More options"]')[i].scrollIntoView(false);
-            if (i < 112) {
+        while (i < 240) {
+            $$('span[class*="IconWrapper"] g[id="overflow"]')[i].scrollIntoView(false);
+
+            if (i < 140) {
                 console.log('Question: ' + i);
                 browser.pause(1500);
-                i= i +3;
+                i= i +4;
             } else {
-                $$('a[aria-label="More options"]')[i].click();
+                $$('span[class*="IconWrapper"] g[id="overflow"]')[i] + $$('div[class*="q-box"] div[class*="ActionBar"] svg')[(i * 5) + 4].click();
                 browser.pause(3000);
-                if ($('a[class*="delete_question"]').isDisplayed()) {
-                    console.log('Deleted Question # ' + i + ': ' + $$('span[class*="ui_content_title"]')[i].getText());
-                    $('a[class*="delete_question"]').click();
+                if ($('div.display__Flex-sc-12j253u-2:nth-child(10) > div:nth-child(1) > div:nth-child(1)').getText() === 'Delete') {
+                    console.log('Deleted Question # ' + i + ': ' + $$('div[class*="TitleText"]')[i].getText());
+                    $('div.display__Flex-sc-12j253u-2:nth-child(10) > div:nth-child(1) > div:nth-child(1)').click();
                     browser.pause(1000);
-                    $('div[id*="form_buttons"] a[class*="submit_button"]').click();
+                    $$('a[id*="submit"]')[0].click();
                     browser.pause(1500);
                     numDeleted++;
+                } else {
+                    console.log('Question: ' + i + ': ' + $$('div[class*="TitleText"]')[i].getText());
                 }
                 i++;
             }
