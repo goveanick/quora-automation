@@ -21,7 +21,8 @@ describe('navigate to Quora partner profile', function() {
                 browser.pause(1500);
                 i= i +4;
             } else {
-                $$('span[class*="IconWrapper"] g[id="overflow"]')[i] + $$('div[class*="q-box"] div[class*="ActionBar"] svg')[(i * 5) + 4].click();
+                // console.log('Im going to start clicking the dots');
+                $$('span[class*="IconWrapper"] g[id="overflow"]')[i] + $$('div[class*="action_bar"] svg')[(i * 5) + 4].click();
                 browser.pause(3000);
                 if ($$('div[style*="will-change"] div[class*="qu-cursor"]').length === 11 && $$('div[style*="will-change"] div[class*="qu-cursor"]')[9].getText() === 'Delete') {
                     console.log('Deleted Question # ' + i + ': ' + $$('span[class*="TitleText"]')[i].getText());
