@@ -23,15 +23,15 @@ describe('navigate to Quora partner profile', function() {
             } else {
                 $$('span[class*="IconWrapper"] g[id="overflow"]')[i] + $$('div[class*="q-box"] div[class*="ActionBar"] svg')[(i * 5) + 4].click();
                 browser.pause(3000);
-                if ($('div.display__Flex-sc-12j253u-2:nth-child(10) > div:nth-child(1) > div:nth-child(1)').getText() === 'Delete') {
-                    console.log('Deleted Question # ' + i + ': ' + $$('div[class*="TitleText"]')[i].getText());
-                    $('div.display__Flex-sc-12j253u-2:nth-child(10) > div:nth-child(1) > div:nth-child(1)').click();
+                if ($$('div[style*="will-change"] div[class*="qu-cursor"]').length === 11 && $$('div[style*="will-change"] div[class*="qu-cursor"]')[9].getText() === 'Delete') {
+                    console.log('Deleted Question # ' + i + ': ' + $$('span[class*="TitleText"]')[i].getText());
+                    $$('div[style*="will-change"] div[class*="qu-cursor"]')[9].click();
                     browser.pause(1000);
                     $$('a[id*="submit"]')[0].click();
                     browser.pause(1500);
                     numDeleted++;
                 } else {
-                    console.log('Question: ' + i + ': ' + $$('div[class*="TitleText"]')[i].getText());
+                    console.log('Question: ' + i + ': ' + $$('span[class*="TitleText"]')[i].getText());
                 }
                 i++;
             }
