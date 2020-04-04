@@ -19,11 +19,11 @@ describe('navigate to Quora partner profile', function() {
             if (i < 200) {
                 console.log('Question: ' + i);
                 browser.pause(1500);
-                i= i +4;
+                i= i +5;
             } else {
                 // console.log('Im going to start clicking the dots');
                 $$('span[class*="IconWrapper"] g[id="overflow"]')[i] + $$('div[class*="action_bar"] svg')[(i * 5) + 4].click();
-                browser.pause(3000);
+                browser.pause(2000);
                 // console.log($$('div[style*="will-change"] div[class*="qu-cursor"]').length);
                 if ($$('div[style*="will-change"] div[class*="qu-cursor"]').length === 11 && $$('div[style*="will-change"] div[class*="qu-cursor"]')[9].getText() === 'Delete') {
                     console.log('Deleted Question # ' + i + ': ' + $$('div[class*="TitleText"]')[i].getText());
